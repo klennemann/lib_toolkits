@@ -1,0 +1,481 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Zygomatic">
+<!-- This Word Cloud was created at https://www.wordclouds.com -->
+<title>Word Cloud</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Onest', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 16px 48px;
+}
+
+.page-title {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 4px auto;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1f2d3d;
+  text-align: left;
+}
+
+.page-subtitle {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 24px auto;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #5b6b7c;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.page-blurb {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 24px auto;
+  text-align: left;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #3a4756;
+}
+
+.page-blurb p {
+  margin: 0 0 14px 0;
+}
+
+.page-blurb p:last-child {
+  margin-bottom: 0;
+}
+
+.wordcloud-wrap {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  margin: 32px auto;
+}
+
+img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
+
+.add-actions-btn {
+  margin-top: 8px;
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2e6da4;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background-color 0.15s ease-in-out, transform 0.05s ease-in-out;
+}
+
+.add-actions-btn:hover {
+  background-color: #245a8a;
+}
+
+.add-actions-btn:active {
+  transform: scale(0.98);
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: 12px;
+  width: min(560px, 92vw);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+.modal-header {
+  padding: 20px 24px 12px;
+  border-bottom: 1px solid #e6e9ec;
+}
+
+.modal-header h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.3rem;
+  color: #1f2d3d;
+  text-align: left;
+}
+
+.modal-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #5b6b7c;
+  text-align: left;
+}
+
+.modal-body {
+  padding: 12px 24px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.action-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f2f4;
+}
+
+.action-item input[type="checkbox"] {
+  margin-top: 3px;
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.action-item label {
+  font-size: 0.95rem;
+  color: #2b3947;
+  cursor: pointer;
+}
+
+.modal-footer {
+  padding: 16px 24px 22px;
+  border-top: 1px solid #e6e9ec;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-footer .submit-btn {
+  padding: 10px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2e6da4;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-footer .submit-btn:hover {
+  background-color: #245a8a;
+}
+
+.modal-footer .cancel-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #5b6b7c;
+  background-color: transparent;
+  border: 1px solid #cdd4da;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-footer .cancel-btn:hover {
+  background-color: #f2f4f6;
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+  <h1 class="page-title">Home Energy and Water Saving Toolkits</h1>
+  <p class="page-subtitle">Community Action Center</p>
+
+  <div class="page-blurb">
+    <p>San Mateo County libraries are proud to offer Home Energy and Water Saving Toolkits for residents to check out at no cost. Each toolkit includes items that residents may keep and install in their homes, such as LED lightbulbs, weatherstripping, faucet aerators and more.</p>
+    <p>This space is for you to see what actions your neighbors and community in San Mateo County are taking to save water and energy. Once you're completed working through the toolkit, add what actions you take in the toolkits using the button below.</p>
+    <p>The larger the word, the higher the number of people who have tried or are doing this action. If a phrase is capitalized, clicking on it will open a link to more information on that action. Try it out!</p>
+  </div>
+
+  <div class="wordcloud-wrap">
+<canvas id="wordCloudCanvas" style="max-width:100%; height:auto; display:block; margin:0 auto;"></canvas>
+  </div>
+
+  <button type="button" class="add-actions-btn" id="openModalBtn">Add your Actions</button>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Add Your Actions</h2>
+      <p>Check off all the actions you've completed, then submit.</p>
+    </div>
+    <div class="modal-body">
+      <form id="actionsForm">
+        <div class="action-item"><input type="checkbox" id="action-1" name="action" value="Measured leaky faucet rates"><label for="action-1">Measured leaky faucet rates</label></div>
+        <div class="action-item"><input type="checkbox" id="action-2" name="action" value="Volunteered or attended local event"><label for="action-2">Volunteered or attended local event</label></div>
+        <div class="action-item"><input type="checkbox" id="action-3" name="action" value="Installed outlet gaskets"><label for="action-3">Installed outlet gaskets</label></div>
+        <div class="action-item"><input type="checkbox" id="action-4" name="action" value="Heat Pump HVAC or Heat Pump Water Heater"><label for="action-4">Heat Pump HVAC or Heat Pump Water Heater</label></div>
+        <div class="action-item"><input type="checkbox" id="action-5" name="action" value="Adjusted default heating temperatures"><label for="action-5">Adjusted default heating temperatures</label></div>
+        <div class="action-item"><input type="checkbox" id="action-6" name="action" value="Visited commercial car wash"><label for="action-6">Visited commercial car wash</label></div>
+        <div class="action-item"><input type="checkbox" id="action-7" name="action" value="Adjusted dishwashing habits"><label for="action-7">Adjusted dishwashing habits</label></div>
+        <div class="action-item"><input type="checkbox" id="action-8" name="action" value="Replaced all bulbs with LED"><label for="action-8">Replaced all bulbs with LED</label></div>
+        <div class="action-item"><input type="checkbox" id="action-9" name="action" value="Cleaned the lint trap"><label for="action-9">Cleaned the lint trap</label></div>
+        <div class="action-item"><input type="checkbox" id="action-10" name="action" value="Installed weatherstripping"><label for="action-10">Installed weatherstripping</label></div>
+        <div class="action-item"><input type="checkbox" id="action-11" name="action" value="ENERGY STAR Appliances"><label for="action-11">ENERGY STAR Appliances</label></div>
+        <div class="action-item"><input type="checkbox" id="action-12" name="action" value="Measured water flow rates"><label for="action-12">Measured water flow rates</label></div>
+        <div class="action-item"><input type="checkbox" id="action-13" name="action" value="Adjusted watering timing"><label for="action-13">Adjusted watering timing</label></div>
+        <div class="action-item"><input type="checkbox" id="action-14" name="action" value="Caulked windows"><label for="action-14">Caulked windows</label></div>
+        <div class="action-item"><input type="checkbox" id="action-15" name="action" value="Started a conservation campaign"><label for="action-15">Started a conservation campaign</label></div>
+        <div class="action-item"><input type="checkbox" id="action-16" name="action" value="Planted native plants"><label for="action-16">Planted native plants</label></div>
+        <div class="action-item"><input type="checkbox" id="action-17" name="action" value="Cleaned refrigerator coils"><label for="action-17">Cleaned refrigerator coils</label></div>
+        <div class="action-item"><input type="checkbox" id="action-18" name="action" value="Swapped to LED bulbs"><label for="action-18">Swapped to LED bulbs</label></div>
+        <div class="action-item"><input type="checkbox" id="action-19" name="action" value="Reused water"><label for="action-19">Reused water</label></div>
+        <div class="action-item"><input type="checkbox" id="action-20" name="action" value="Scheduled an audit"><label for="action-20">Scheduled an audit</label></div>
+        <div class="action-item"><input type="checkbox" id="action-21" name="action" value="Installed drip irrigation"><label for="action-21">Installed drip irrigation</label></div>
+        <div class="action-item"><input type="checkbox" id="action-22" name="action" value='Water heater &quot;Vacation Mode&quot;'><label for="action-22">Water heater "Vacation Mode"</label></div>
+        <div class="action-item"><input type="checkbox" id="action-23" name="action" value="Used infrared thermometer"><label for="action-23">Used infrared thermometer</label></div>
+        <div class="action-item"><input type="checkbox" id="action-24" name="action" value="Planted trees"><label for="action-24">Planted trees</label></div>
+        <div class="action-item"><input type="checkbox" id="action-25" name="action" value="Kill-a-Watt Meter"><label for="action-25">Kill-a-Watt Meter</label></div>
+        <div class="action-item"><input type="checkbox" id="action-26" name="action" value="Added insulation"><label for="action-26">Added insulation</label></div>
+        <div class="action-item"><input type="checkbox" id="action-27" name="action" value="Adjusted pool care"><label for="action-27">Adjusted pool care</label></div>
+        <div class="action-item"><input type="checkbox" id="action-28" name="action" value="Installed smart strips"><label for="action-28">Installed smart strips</label></div>
+        <div class="action-item"><input type="checkbox" id="action-29" name="action" value="Induction Stovetop Loaner"><label for="action-29">Induction Stovetop Loaner</label></div>
+        <div class="action-item"><input type="checkbox" id="action-30" name="action" value="Adjusted recirculation timer"><label for="action-30">Adjusted recirculation timer</label></div>
+        <div class="action-item"><input type="checkbox" id="action-31" name="action" value="Refrigerator temperature"><label for="action-31">Refrigerator temperature</label></div>
+        <div class="action-item"><input type="checkbox" id="action-32" name="action" value="Installed pipe insulation"><label for="action-32">Installed pipe insulation</label></div>
+        <div class="action-item"><input type="checkbox" id="action-33" name="action" value="Used shower timer"><label for="action-33">Used shower timer</label></div>
+        <div class="action-item"><input type="checkbox" id="action-34" name="action" value="Used daylighting"><label for="action-34">Used daylighting</label></div>
+        <div class="action-item"><input type="checkbox" id="action-35" name="action" value="Measured toilet leaks"><label for="action-35">Measured toilet leaks</label></div>
+        <div class="action-item"><input type="checkbox" id="action-36" name="action" value="Used cold water washing"><label for="action-36">Used cold water washing</label></div>
+        <div class="action-item"><input type="checkbox" id="action-37" name="action" value="Installed faucet aerators"><label for="action-37">Installed faucet aerators</label></div>
+        <div class="action-item"><input type="checkbox" id="action-38" name="action" value="Used full dishwasher"><label for="action-38">Used full dishwasher</label></div>
+        <div class="action-item"><input type="checkbox" id="action-39" name="action" value="Measured water heater temperature"><label for="action-39">Measured water heater temperature</label></div>
+        <div class="action-item"><input type="checkbox" id="action-40" name="action" value="Shared this toolkit with someone else"><label for="action-40">Shared this toolkit with someone else</label></div>
+        <div class="action-item"><input type="checkbox" id="action-41" name="action" value="Installed a low-flow showerhead"><label for="action-41">Installed a low-flow showerhead</label></div>
+        <div class="action-item"><input type="checkbox" id="action-42" name="action" value="BayREN EASE Program"><label for="action-42">BayREN EASE Program</label></div>
+        <div class="action-item"><input type="checkbox" id="action-43" name="action" value="Unplugged Electronics"><label for="action-43">Unplugged Electronics</label></div>
+        <div class="action-item"><input type="checkbox" id="action-44" name="action" value="Checked for irrigation leaks"><label for="action-44">Checked for irrigation leaks</label></div>
+        <div class="action-item"><input type="checkbox" id="action-45" name="action" value="Safe Routes to School"><label for="action-45">Safe Routes to School</label></div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="cancel-btn" id="cancelModalBtn">Cancel</button>
+      <button type="button" class="submit-btn" id="submitModalBtn">Submit</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/wordcloud@1.2.2/src/wordcloud2.js"></script>
+<script>
+(function() {
+
+  // ---- 1. Word list: weight, color, and url loaded directly from the
+  //       community's real submission data (prototype.csv).
+  var ACTIONS = [
+    { text: "Installed pipe insulation", weight: 0, color: "#ed5814" },
+    { text: "Caulked windows", weight: 0, color: "#ed5814" },
+    { text: "Adjusted recirculation timer", weight: 0, color: "#3d72d4" },
+    { text: "Started a conservation campaign", weight: 2, color: "#289717" },
+    { text: "Added insulation", weight: 4, color: "#ed5814" },
+    { text: 'Water heater "Vacation Mode"', weight: 4, color: "#3d72d4" },
+    { text: "Scheduled an audit", weight: 6, color: "#ed5814" },
+    { text: "Cleaned refrigerator coils", weight: 8, color: "#ed5814" },
+    { text: "Heat Pump HVAC or Heat Pump Water Heater", weight: 10, color: "#ed5814" },
+    { text: "Installed smart strips", weight: 10, color: "#ed5814" },
+    { text: "Induction Stovetop Loaner", weight: 10, color: "#289717", url: "https://pge-induction.myturn.com/library/" },
+    { text: "Adjusted pool care", weight: 13, color: "#3d72d4" },
+    { text: "Adjusted watering timing", weight: 14, color: "#3d72d4" },
+    { text: "Safe Routes to School", weight: 14, color: "#289717", url: "https://www.smcoe.org/for-educators/student-services/srts" },
+    { text: "Planted trees", weight: 18, color: "#ed5814" },
+    { text: "Used shower timer", weight: 20, color: "#3d72d4" },
+    { text: "Used daylighting", weight: 20, color: "#ed5814" },
+    { text: "Unplugged Electronics", weight: 20, color: "#ed5814" },
+    { text: "Installed outlet gaskets", weight: 21, color: "#ed5814" },
+    { text: "Checked for irrigation leaks", weight: 21, color: "#3d72d4" },
+    { text: "Measured leaky faucet rates", weight: 24, color: "#3d72d4" },
+    { text: "Planted native plants", weight: 24, color: "#3d72d4" },
+    { text: "BayREN EASE Program", weight: 24, color: "#289717", url: "https://www.bayren.org/ease-home" },
+    { text: "Volunteered or attended local event", weight: 24, color: "#289717" },
+    { text: "Used cold water washing", weight: 25, color: "#3d72d4" },
+    { text: "ENERGY STAR Appliances", weight: 25, color: "#ed5814", url: "https://www.energystar.gov/products/products-list" },
+    { text: "Visited commercial car wash", weight: 28, color: "#3d72d4" },
+    { text: "Installed a low-flow showerhead", weight: 28, color: "#3d72d4" },
+    { text: "Adjusted dishwashing habits", weight: 29, color: "#ed5814" },
+    { text: "Installed drip irrigation", weight: 30, color: "#3d72d4" },
+    { text: "Reused water", weight: 30, color: "#3d72d4" },
+    { text: "Adjusted default heating temperatures", weight: 30, color: "#ed5814" },
+    { text: "Installed weatherstripping", weight: 31, color: "#ed5814" },
+    { text: "Shared this toolkit with someone else", weight: 32, color: "#289717" },
+    { text: "Measured water heater temperature", weight: 34, color: "#3d72d4" },
+    { text: "Installed faucet aerators", weight: 43, color: "#3d72d4" },
+    { text: "Replaced all bulbs with LED", weight: 48, color: "#ed5814" },
+    { text: "Used full dishwasher", weight: 60, color: "#3d72d4" },
+    { text: "Cleaned the lint trap", weight: 67, color: "#ed5814" },
+    { text: "Measured toilet leaks", weight: 79, color: "#3d72d4" },
+    { text: "Refrigerator temperature", weight: 80, color: "#ed5814" },
+    { text: "Measured water flow rates", weight: 80, color: "#3d72d4" },
+    { text: "Swapped to LED bulbs", weight: 96, color: "#ed5814" },
+    { text: "Kill-a-Watt Meter", weight: 100, color: "#ed5814" },
+    { text: "Used infrared thermometer", weight: 121, color: "#ed5814" }
+  ];
+
+  var ACTION_BY_TEXT = {};
+  ACTIONS.forEach(function(a) { ACTION_BY_TEXT[a.text] = a; });
+
+  var STORAGE_KEY = "toolkitActionWeights";
+
+  // ---- 2. Load / save weights from localStorage (per-browser only) ----
+  function loadWeights() {
+    var stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    } catch (e) {
+      stored = null;
+    }
+    var weights = {};
+    ACTIONS.forEach(function(a) { weights[a.text] = a.weight; });
+    if (stored) {
+      Object.keys(stored).forEach(function(text) {
+        if (ACTION_BY_TEXT.hasOwnProperty(text)) {
+          weights[text] = stored[text];
+        }
+      });
+    }
+    return weights;
+  }
+
+  function saveWeights(weights) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(weights));
+    } catch (e) {
+      // localStorage unavailable (e.g. private browsing) - fail silently
+    }
+  }
+
+  var currentWeights = loadWeights();
+
+  // ---- 3. Render the word cloud onto the canvas ----
+  var canvas = document.getElementById('wordCloudCanvas');
+  var wrap = document.querySelector('.wordcloud-wrap');
+
+  function renderWordCloud() {
+    if (!window.WordCloud) return;
+
+    var containerWidth = wrap.clientWidth || 900;
+    var width = Math.max(320, Math.min(containerWidth, 1400));
+    var height = Math.round(width * 0.515);
+
+    canvas.width = width;
+    canvas.height = height;
+
+    var scale = width / 1100;
+
+    var list = ACTIONS.map(function(a) {
+      return [a.text, currentWeights[a.text]];
+    });
+
+    WordCloud(canvas, {
+      list: list,
+      backgroundColor: '#ffffff',
+      fontFamily: "'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+      fontWeight: '600',
+      gridSize: Math.max(6, Math.round(8 * scale)),
+      weightFactor: function(size) {
+        // +6 baseline keeps 0-weight words visible (small) instead of invisible
+        return (size + 6) * scale * 1.15;
+      },
+      rotateRatio: 0,
+      shuffle: false,
+      shrinkToFit: true,
+      drawOutOfBound: false,
+      color: function(word) {
+        var action = ACTION_BY_TEXT[word];
+        return action ? action.color : '#333333';
+      },
+      click: function(item) {
+        var action = ACTION_BY_TEXT[item[0]];
+        if (action && action.url) {
+          window.open(action.url, '_blank', 'noopener');
+        }
+      },
+      hover: function(item) {
+        canvas.style.cursor = (item && ACTION_BY_TEXT[item[0]] && ACTION_BY_TEXT[item[0]].url) ? 'pointer' : 'default';
+      }
+    });
+  }
+
+  renderWordCloud();
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(renderWordCloud, 200);
+  });
+
+  // ---- 4. Modal open/close + submit handling ----
+  var openBtn = document.getElementById('openModalBtn');
+  var overlay = document.getElementById('modalOverlay');
+  var cancelBtn = document.getElementById('cancelModalBtn');
+  var submitBtn = document.getElementById('submitModalBtn');
+  var form = document.getElementById('actionsForm');
+
+  function openModal() {
+    overlay.classList.add('open');
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+  }
+
+  openBtn.addEventListener('click', openModal);
+  cancelBtn.addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      closeModal();
+    }
+  });
+
+  submitBtn.addEventListener('click', function() {
+    var checked = Array.prototype.slice.call(form.querySelectorAll('input[name="action"]:checked'))
+      .map(function(el) { return el.value; });
+
+    checked.forEach(function(text) {
+      currentWeights[text] = (currentWeights[text] || 0) + 1;
+    });
+    saveWeights(currentWeights);
+
+    // Uncheck all boxes for next time and close the modal
+    form.querySelectorAll('input[name="action"]:checked').forEach(function(el) {
+      el.checked = false;
+    });
+
+    renderWordCloud();
+    closeModal();
+  });
+})();
+</script>
+</body>
+</html>
